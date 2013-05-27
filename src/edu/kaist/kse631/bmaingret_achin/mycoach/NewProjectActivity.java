@@ -1,10 +1,9 @@
 package edu.kaist.kse631.bmaingret_achin.mycoach;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 
-public class NewProjectActivity extends Activity {
+public class NewProjectActivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
