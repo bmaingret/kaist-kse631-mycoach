@@ -22,6 +22,54 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="edu.kaist.kse631.bmaingret_achin.mycoach.StartActivity"
+            android:label="@string/title_activity_start" >
+        </activity>
+        <activity
+            android:name="edu.kaist.kse631.bmaingret_achin.mycoach.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="edu.kaist.kse631.bmaingret_achin.mycoach.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.kaist.kse631.bmaingret_achin.mycoach.MainActivity" />
+        </activity>
+        <activity
+            android:name="edu.kaist.kse631.bmaingret_achin.mycoach.NewProjectActivity"
+            android:label="@string/title_activity_new_project" >
+        </activity>
+        <activity
+            android:name="edu.kaist.kse631.bmaingret_achin.mycoach.ProjectSettingsActivity"
+            android:label="@string/title_activity_project_settings" >
+        </activity>
+        <activity
+            android:name="edu.kaist.kse631.bmaingret_achin.mycoach.ActivityDetailsActivity"
+            android:label="@string/title_activity_activity_details" >
+        </activity>
+        <activity
+            android:name="edu.kaist.kse631.bmaingret_achin.mycoach.NewActivityActivity"
+            android:label="@string/title_activity_new_activity"
+            android:parentActivityName="edu.kaist.kse631.bmaingret_achin.mycoach.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.kaist.kse631.bmaingret_achin.mycoach.MainActivity" />
+        </activity>
+        <activity
+            android:name="edu.kaist.kse631.bmaingret_achin.mycoach.HistoryActivity"
+            android:label="@string/title_activity_history"
+            android:parentActivityName="edu.kaist.kse631.bmaingret_achin.mycoach.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.kaist.kse631.bmaingret_achin.mycoach.MainActivity" />
+        </activity>
+        <activity
+            android:name="edu.kaist.kse631.bmaingret_achin.mycoach.LevelUpActivity"
+            android:label="@string/title_activity_level_up" >
+        </activity>
+        <activity
+            android:name="edu.kaist.kse631.bmaingret_achin.mycoach.TipsActivity"
+            android:label="@string/title_activity_tips" >
+        </activity>
     </application>
 
 </manifest>
