@@ -12,5 +12,12 @@
     <string name="title_activity_history">HistoryActivity</string>
     <string name="title_activity_level_up">LevelUpActivity</string>
     <string name="title_activity_tips">TipsActivity</string>
+    <string name="initial_message">This is the first launch.</string>
+    <string name="initial_message2">Start right now by creating a new project !</string>
+    <string name="mainActivity_createprojectbutton_text">Create a new project</string>
+    <string name="mainActivity_social_text">Get more power by logging in using your social account !</string>
+    <string name="facebook_login">Facebook Login</string>
+    <string name="twitter_login">Twitter Login</string>
+    <string name="linked_in_login">Linked In Login</string>
 
 </resources>
