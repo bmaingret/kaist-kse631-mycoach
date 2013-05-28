@@ -19,5 +19,14 @@
     <string name="facebook_login">Facebook Login</string>
     <string name="twitter_login">Twitter Login</string>
     <string name="linked_in_login">Linked In Login</string>
+    <string name="newProject_currentHeader">Current Status</string>
+    <string name="newProject_current_numWeek">Number of activities done last week</string>
+    <string name="newProject_current_avgDuration">Average duration of activities</string>
+    <string name="newProject_current_goalHeader">Your Goal</string>
+    <string name="newProject_goal_numAct">Number of activities per week</string>
+    <string name="newProject_goal_avgDuration">Average duration per activity</string>
+    <string name="newProject_submitButtonText">Save &amp; Start Planning</string>
+    <string name="newProject_goal_hint">Try to set a realistic goal for yourself</string>
+    <string name="newProject_minuteText">minutes</string>
 
 </resources>
