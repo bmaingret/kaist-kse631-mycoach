@@ -1,17 +1,17 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <CheckBoxPreference
+        android:key="remind"
         android:defaultValue="true"
-        android:key="reminder_checkbox"
         android:summary="@string/pref_description_reminder"
         android:title="@string/pref_title_reminder" />
     <CheckBoxPreference
+        android:key="addToCalendar"
         android:defaultValue="true"
-        android:key="calendar_checkbox"
         android:title="@string/pref_title_reminder" />
 
     <ListPreference
-        android:key="calendar_list"
+        android:key="calendar"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
         android:title="@string/pref_title_calendar_list"
