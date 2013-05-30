@@ -1,11 +1,13 @@
 <resources>
     <string name="title_activity_settings">Settings</string>
 
+    <string name="pref_header_project">Project settings</string>
+    
     <string name="pref_header_general">General</string>
     
-    <string name="pref_title_reminder">Remind me</string>
-    <string name="pref_description_reminder">Set an alarm on day you are supposed to work out</string>
+    	<string name="pref_title_reminder">Remind me</string>
+    		<string name="pref_description_reminder">Set an alarm on day you are supposed to work out</string>
    
-    <string name="pref_title_calendar">Sync with my calendar</string>
-    <string name="pref_title_calendar_list">Select a calendar</string>
+    	<string name="pref_title_calendar">Sync with my calendar</string>
+    	<string name="pref_title_calendar_list">Select a calendar</string>
 </resources>
