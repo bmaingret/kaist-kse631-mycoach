@@ -16,6 +16,7 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.support.v4.app.NavUtils;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 
 /**
@@ -131,14 +132,11 @@ public class SettingsActivity extends PreferenceActivity {
 			
 			CharSequence[] entries = new String[]{"test"};
 			CharSequence[] values = new String[]{"test"};
-			
+			//TODO Generate entries and values from calendar list
 	        ListPreference listPref = (ListPreference)findPreference("calendar_list");
-	        listPref.setKey("keyName"); //Refer to get the pref value
 	        listPref.setEntries(entries);
 	        listPref.setEntryValues(values);
-	        listPref.setDialogTitle("Dialog Title"); 
-	        listPref.setTitle("Title");
-	        listPref.setSummary("Summary");
+	        bindPreferenceSummaryToValue(listPref);
 		}
 	}
 }

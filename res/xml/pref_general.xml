@@ -8,12 +8,13 @@
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="calendar_checkbox"
-        android:title="@string/pref_title_reminder" />
+        android:title="@string/pref_title_calendar" />
 
     <ListPreference
         android:key="calendar_list"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"
         android:title="@string/pref_title_calendar_list"
+        android:dialogTitle="@string/pref_calendar_dialog_title"
         android:dependency="calendar_checkbox" />
 </PreferenceScreen>
