@@ -43,5 +43,10 @@
     <string name="soccer_basketball">Soccer / Basketball</string>
     <string name="swimming">Swimming</string>
     <string name="save_project">Save Project</string>
+    <string name="main_start_activity_button">Start a new activity</string>
+    <string name="main_record_activity_button">Record an activity</string>
+    <string name="main_history_button">Full history</string>
+    <string name="main_cur_level">Current level completion</string>
+    <string name="main_cur_week_activities">You still need 1 activity for this week</string>
 
 </resources>
