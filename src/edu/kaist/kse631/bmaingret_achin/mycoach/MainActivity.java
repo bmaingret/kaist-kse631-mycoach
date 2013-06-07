@@ -32,6 +32,17 @@ public class MainActivity extends BaseActivity {
 			}
 		});
         
+        Button historyButton = (Button) findViewById(R.id.main_historyButton);
+        historyButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+				startActivity(intent);	
+			}
+		});
+        
         ImageButton stopActivity = (ImageButton) findViewById(R.id.main_stop_button);
         stopActivity.setOnClickListener(new OnClickListener() {
 			@Override
