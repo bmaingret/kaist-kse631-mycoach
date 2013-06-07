@@ -48,5 +48,10 @@
     <string name="main_history_button">Full history</string>
     <string name="main_cur_level">Current level completion</string>
     <string name="main_cur_week_activities">You still need 1 activity for this week</string>
-
+	<string name="newActivity_type">Type :</string>
+	<string name="newActivity_track">Track my movements</string>
+	<string name="newActivity_track_sub">This option will use you GPS to record your position</string>
+	<string name="main_elapsed_time">Elapsed time:</string>
+	<string name="main_ongoing_activity">Ongoing activity:</string>
+	<string name="main_recording">Recording...</string>
 </resources>
