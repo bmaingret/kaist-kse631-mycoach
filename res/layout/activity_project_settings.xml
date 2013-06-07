@@ -238,6 +238,7 @@
         android:background="#ccc" />
 
 <Button
+    android:id="@+id/projSetting_save_project"
     android:layout_width="match_parent"
     android:layout_height="33dp"
     android:text="@string/save_project"
