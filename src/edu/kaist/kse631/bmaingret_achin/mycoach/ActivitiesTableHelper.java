@@ -22,6 +22,7 @@ public class ActivitiesTableHelper{
 	public static final String COLUMN_W2 = "w2";
 	public static final String COLUMN_W3 = "w3";
 	public static final String COLUMN_W4 = "w4";
+	public static final String[] ALL_COLUMNS = new String[]{COLUMN_ID, COLUMN_ACTIVITY, COLUMN_W1, COLUMN_W3, COLUMN_W3, COLUMN_W4 };
 
 	public static final int W1 = 59;
 	public static final int W2 = 70;
@@ -58,5 +59,13 @@ public class ActivitiesTableHelper{
 		return activities;
 	}
 	
-	
+	public Cursor getActivity(long id){
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		Cursor activity = db.query(TABLE_NAME, 
+				ALL_COLUMNS,
+				COLUMN_ID + " = ? ",
+				new String[]{String.valueOf(id)},
+				null, null, null, null);
+		return activity;
+	}
 }
