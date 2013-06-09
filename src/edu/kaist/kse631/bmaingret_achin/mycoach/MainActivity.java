@@ -129,6 +129,7 @@ public class MainActivity extends BaseActivity {
     protected void saveActivity(){
     	long duration = SystemClock.elapsedRealtime()-chrono.getBase();
     	long datetime =  Calendar.getInstance().getTimeInMillis();
-    	
+    	UserActivitiesTableHelper helper = new UserActivitiesTableHelper(this);
+    	helper.saveActivity(activityId, datetime, duration);
     }
 }
