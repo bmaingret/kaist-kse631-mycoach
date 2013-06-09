@@ -3,6 +3,7 @@ package edu.kaist.kse631.bmaingret_achin.mycoach;
 import java.util.Calendar;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
@@ -11,6 +12,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +25,7 @@ public class MainActivity extends BaseActivity {
 	private boolean ongoing = false;
 	private static final String TAG = "MainActivity";
 	private Chronometer chrono = null;
+	private ListView historyView = null;
 	
 	
     @Override
@@ -75,6 +79,7 @@ public class MainActivity extends BaseActivity {
 			}
 		});
         
+        /* Record a new activity */
         Button recordActivity = (Button) findViewById(R.id.main_recordButton);
         recordActivity.setOnClickListener(new OnClickListener() {
 			@Override
@@ -83,6 +88,19 @@ public class MainActivity extends BaseActivity {
 				startActivity(intent);	
 			}
 		});
+        
+        /* History listview */
+        historyView = (ListView) findViewById(R.id.main_historyListView);
+        UserActivitiesTableHelper helper = new UserActivitiesTableHelper(this);
+        Cursor history = helper.getHistory();
+        String[] from = new String[]{ActivitiesTableHelper.COLUMN_ACTIVITY};
+        int[] to = {android.R.id.text1};
+        SimpleCursorAdapter historyAdapter = new SimpleCursorAdapter(this,
+        		android.R.layout.simple_list_item_1,
+        		history,
+        		from,
+        		to);
+        historyView.setAdapter(historyAdapter);
     }
     
     protected void onSaveInstanceState (Bundle outState){
@@ -110,6 +128,8 @@ public class MainActivity extends BaseActivity {
     	if (requestCode == 1) {
     		if(resultCode == RESULT_OK){       
     			updateUI(true);
+    			/* Setting activityId */
+    			activityId = data.getLongExtra("activityId", -1);
     			
     			/*display activity name*/
     			TextView activityText = (TextView) findViewById(R.id.main_ongoing_activity);

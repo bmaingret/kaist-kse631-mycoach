@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 	private static String DB_PATH = "";
 	private static String DB_NAME = "db.sqlite";
 	private final Context myContext;
-	public static final int DATABASE_VERSION = 2;
+	public static final int DATABASE_VERSION = 3;
 	private static final String TAG = "DatabaseHelper";
 	private static final String CREATE_FILE = "create.sql";
 	private static final String DELETE_FILE = "delete.sql";

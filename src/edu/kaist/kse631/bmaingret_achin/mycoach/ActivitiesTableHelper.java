@@ -48,7 +48,7 @@ public class ActivitiesTableHelper{
 				activityList.put(activities.getInt(0), activities.getString(1));
 			} while (activities.moveToNext());
 		}
-		db.close();
+		try{if(null != db){ db.close(); db = null;}}catch(Exception e){}
 		return activities;
 	}
 	
@@ -59,7 +59,7 @@ public class ActivitiesTableHelper{
 				COLUMN_ID + " = ? ",
 				new String[]{String.valueOf(id)},
 				null, null, null, null);
-		db.close();
+		try{if(null != db){ db.close(); db = null;}}catch(Exception e){}
 		return activity;
 	}
 }
