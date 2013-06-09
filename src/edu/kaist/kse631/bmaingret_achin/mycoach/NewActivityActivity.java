@@ -45,12 +45,14 @@ public class NewActivityActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) {
 				activityId = activitySpinner.getSelectedItemId();
+				String activity = ((Cursor) activitySpinner.getSelectedItem()).getString(1);
 				Toast toast = Toast.makeText(NewActivityActivity.this, "Activity id:" + activityId, Toast.LENGTH_SHORT);
 				toast.show();
 
 				Intent intent = new Intent(NewActivityActivity.this, MainActivity.class);
 				setResult(RESULT_OK, intent); 
 				intent.putExtra("activityId", activityId);
+				intent.putExtra("activity", activity);
 				finish();
 			}
 		});

@@ -6,12 +6,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class MainActivity extends BaseActivity {
 	private View startActivitySpecifics = null;
 	private View activityStartedSpecifics = null;
+	private long activityId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +66,15 @@ public class MainActivity extends BaseActivity {
 		});
     }
     
+    
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	  if (requestCode == 1) {
     	     if(resultCode == RESULT_OK){       
     	    	 startActivitySpecifics.setVisibility(View.GONE);
     	    	 activityStartedSpecifics.setVisibility(View.VISIBLE);
+    	    	 TextView activityText = (TextView) findViewById(R.id.main_ongoing_activity);
+    	    	 String activity = data.getStringExtra("activity");
+    	    	 activityText.setText(activityText.getText() + " " + activity);
     	     }
     	     if (resultCode == RESULT_CANCELED) {
     	     }
