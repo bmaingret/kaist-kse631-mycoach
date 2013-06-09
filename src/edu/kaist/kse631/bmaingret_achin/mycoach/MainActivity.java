@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,11 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /* Getting back the data in savedinstance */
+        if (null != savedInstanceState){
+        	activityId = savedInstanceState.getLong("activityId", -1);
+        }
+        
         setContentView(R.layout.activity_main);
         
         /* Hiding the part used when an activity is going on */
@@ -66,15 +72,25 @@ public class MainActivity extends BaseActivity {
 		});
     }
     
+    protected void onSaveInstanceState (Bundle outState){
+    	outState.putLong("activityId", activityId);
+    }
     
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	  if (requestCode == 1) {
     	     if(resultCode == RESULT_OK){       
+    	    	 /* upadting ui*/
     	    	 startActivitySpecifics.setVisibility(View.GONE);
     	    	 activityStartedSpecifics.setVisibility(View.VISIBLE);
+    	    	 
+    	    	 /*display activity name*/
     	    	 TextView activityText = (TextView) findViewById(R.id.main_ongoing_activity);
     	    	 String activity = data.getStringExtra("activity");
     	    	 activityText.setText(activityText.getText() + " " + activity);
+    	    	 
+    	    	 /* Starting chronometer*/
+    	    	 Chronometer chrono = (Chronometer) findViewById(R.id.main_chronometer);
+    	    	 chrono.start();
     	     }
     	     if (resultCode == RESULT_CANCELED) {
     	     }
