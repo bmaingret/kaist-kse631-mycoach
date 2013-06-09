@@ -67,7 +67,6 @@ public class NewActivityActivity extends BaseActivity {
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         activitySpinner.setAdapter(adapter);
-        helper.close();
 	}
 	
 	@Override

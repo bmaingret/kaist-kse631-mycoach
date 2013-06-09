@@ -31,18 +31,10 @@ public class ActivitiesTableHelper{
 
 	private static final String TAG = "ActivitiesTable";
 	private DatabaseHelper dbHelper;
+	private SQLiteDatabase db = null;
 
 	public ActivitiesTableHelper(Context context) {
 		dbHelper = new DatabaseHelper(context);
-		open();
-	}
-
-	public void open() throws SQLException {
-		dbHelper.openDataBase();
-	}
-
-	public void close() {
-		dbHelper.close();
 	}
 	
 	public Cursor getActivityList(){
@@ -56,6 +48,7 @@ public class ActivitiesTableHelper{
 				activityList.put(activities.getInt(0), activities.getString(1));
 			} while (activities.moveToNext());
 		}
+		db.close();
 		return activities;
 	}
 	
@@ -66,6 +59,7 @@ public class ActivitiesTableHelper{
 				COLUMN_ID + " = ? ",
 				new String[]{String.valueOf(id)},
 				null, null, null, null);
+		db.close();
 		return activity;
 	}
 }

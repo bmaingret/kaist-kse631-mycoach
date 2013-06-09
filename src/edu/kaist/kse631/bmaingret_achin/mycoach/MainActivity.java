@@ -31,6 +31,7 @@ public class MainActivity extends BaseActivity {
         activityStartedSpecifics = (View) findViewById(R.id.activity_started_layout);
         activityStartedSpecifics.setVisibility(View.GONE);
         
+        /* Start activity button */
         Button startActivity = (Button) findViewById(R.id.main_startButton);
         startActivity.setOnClickListener(new OnClickListener() {
 			@Override
@@ -40,6 +41,7 @@ public class MainActivity extends BaseActivity {
 			}
 		});
         
+        /* History button */
         Button historyButton = (Button) findViewById(R.id.main_historyButton);
         historyButton.setOnClickListener(new OnClickListener() {
 			
@@ -51,6 +53,7 @@ public class MainActivity extends BaseActivity {
 			}
 		});
         
+        /* Stop activity button */
         ImageButton stopActivity = (ImageButton) findViewById(R.id.main_stop_button);
         stopActivity.setOnClickListener(new OnClickListener() {
 			@Override
@@ -59,6 +62,7 @@ public class MainActivity extends BaseActivity {
 				startActivitySpecifics.setVisibility(View.VISIBLE);
 				Toast toast = Toast.makeText(MainActivity.this, "TODO: Record activity", Toast.LENGTH_SHORT);
 				toast.show();
+				//createActivity(time, activityId);
 			}
 		});
         
@@ -75,25 +79,29 @@ public class MainActivity extends BaseActivity {
     protected void onSaveInstanceState (Bundle outState){
     	outState.putLong("activityId", activityId);
     }
-    
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-    	  if (requestCode == 1) {
-    	     if(resultCode == RESULT_OK){       
-    	    	 /* upadting ui*/
-    	    	 startActivitySpecifics.setVisibility(View.GONE);
-    	    	 activityStartedSpecifics.setVisibility(View.VISIBLE);
-    	    	 
-    	    	 /*display activity name*/
-    	    	 TextView activityText = (TextView) findViewById(R.id.main_ongoing_activity);
-    	    	 String activity = data.getStringExtra("activity");
-    	    	 activityText.setText(activityText.getText() + " " + activity);
-    	    	 
-    	    	 /* Starting chronometer*/
-    	    	 Chronometer chrono = (Chronometer) findViewById(R.id.main_chronometer);
-    	    	 chrono.start();
-    	     }
-    	     if (resultCode == RESULT_CANCELED) {
-    	     }
-    	  }
+    	if (requestCode == 1) {
+    		if(resultCode == RESULT_OK){       
+    			/* upadting ui*/
+    			startActivitySpecifics.setVisibility(View.GONE);
+    			activityStartedSpecifics.setVisibility(View.VISIBLE);
+
+    			/*display activity name*/
+    			TextView activityText = (TextView) findViewById(R.id.main_ongoing_activity);
+    			String activity = data.getStringExtra("activity");
+    			activityText.setText(getResources().getString(R.id.main_ongoing_activity) + " " + activity);
+
+    			/* Starting chronometer*/
+    			Chronometer chrono = (Chronometer) findViewById(R.id.main_chronometer);
+    			chrono.start();
+    		}
+    		if (resultCode == RESULT_CANCELED) {
+    		}
     	}
+    }
+    
+    protected void createActivity(long activityId, long time){
+    	
+    }
 }
