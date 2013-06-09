@@ -76,6 +76,7 @@ public class MainActivity extends BaseActivity {
 				Toast toast = Toast.makeText(MainActivity.this, "TODO: Record activity", Toast.LENGTH_SHORT);
 				toast.show();
 				saveActivity();
+				updateHistory();
 			}
 		});
         
@@ -91,16 +92,7 @@ public class MainActivity extends BaseActivity {
         
         /* History listview */
         historyView = (ListView) findViewById(R.id.main_historyListView);
-        UserActivitiesTableHelper helper = new UserActivitiesTableHelper(this);
-        Cursor history = helper.getHistory();
-        String[] from = new String[]{ActivitiesTableHelper.COLUMN_ACTIVITY};
-        int[] to = {android.R.id.text1};
-        SimpleCursorAdapter historyAdapter = new SimpleCursorAdapter(this,
-        		android.R.layout.simple_list_item_1,
-        		history,
-        		from,
-        		to);
-        historyView.setAdapter(historyAdapter);
+        updateHistory();
     }
     
     protected void onSaveInstanceState (Bundle outState){
@@ -151,5 +143,18 @@ public class MainActivity extends BaseActivity {
     	long datetime =  Calendar.getInstance().getTimeInMillis();
     	UserActivitiesTableHelper helper = new UserActivitiesTableHelper(this);
     	helper.saveActivity(activityId, datetime, duration);
+    }
+    
+    protected void updateHistory(){
+        UserActivitiesTableHelper helper = new UserActivitiesTableHelper(this);
+        Cursor history = helper.getHistory();
+        String[] from = new String[]{ActivitiesTableHelper.COLUMN_ACTIVITY};
+        int[] to = {android.R.id.text1};
+        SimpleCursorAdapter historyAdapter = new SimpleCursorAdapter(this,
+        		android.R.layout.simple_list_item_1,
+        		history,
+        		from,
+        		to);
+        historyView.setAdapter(historyAdapter);
     }
 }
