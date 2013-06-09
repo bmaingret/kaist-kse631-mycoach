@@ -2,6 +2,7 @@ package edu.kaist.kse631.bmaingret_achin.mycoach;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -15,13 +16,16 @@ public class MainActivity extends BaseActivity {
 	private View startActivitySpecifics = null;
 	private View activityStartedSpecifics = null;
 	private long activityId = -1;
-
+	private boolean ongoing = false;
+	private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         /* Getting back the data in savedinstance */
         if (null != savedInstanceState){
         	activityId = savedInstanceState.getLong("activityId", -1);
+        	ongoing = savedInstanceState.getBoolean("ongoing", false);
+        	Log.d(TAG, "Instance state restored");
         }
         
         setContentView(R.layout.activity_main);
@@ -29,7 +33,7 @@ public class MainActivity extends BaseActivity {
         /* Hiding the part used when an activity is going on */
         startActivitySpecifics = (View) findViewById(R.id.start_activity_layout);
         activityStartedSpecifics = (View) findViewById(R.id.activity_started_layout);
-        activityStartedSpecifics.setVisibility(View.GONE);
+        updateUI(null);
         
         /* Start activity button */
         Button startActivity = (Button) findViewById(R.id.main_startButton);
@@ -58,8 +62,7 @@ public class MainActivity extends BaseActivity {
         stopActivity.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				activityStartedSpecifics.setVisibility(View.GONE);
-				startActivitySpecifics.setVisibility(View.VISIBLE);
+				updateUI(false);
 				Toast toast = Toast.makeText(MainActivity.this, "TODO: Record activity", Toast.LENGTH_SHORT);
 				toast.show();
 				//createActivity(time, activityId);
@@ -78,15 +81,30 @@ public class MainActivity extends BaseActivity {
     
     protected void onSaveInstanceState (Bundle outState){
     	outState.putLong("activityId", activityId);
+    	outState.putBoolean("ongoing", ongoing);
+    	Log.d(TAG, "Instance state saved");
     }
 
+    protected void updateUI(Boolean ongoing){
+    	if (null != ongoing){
+    		this.ongoing = ongoing;
+    	}
+    		
+    	if (this.ongoing){
+			startActivitySpecifics.setVisibility(View.GONE);
+			activityStartedSpecifics.setVisibility(View.VISIBLE);
+    	}
+    	else{
+			startActivitySpecifics.setVisibility(View.VISIBLE);
+			activityStartedSpecifics.setVisibility(View.GONE);
+    	}
+    }
+    
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     	if (requestCode == 1) {
     		if(resultCode == RESULT_OK){       
-    			/* upadting ui*/
-    			startActivitySpecifics.setVisibility(View.GONE);
-    			activityStartedSpecifics.setVisibility(View.VISIBLE);
-
+    			updateUI(true);
+    			
     			/*display activity name*/
     			TextView activityText = (TextView) findViewById(R.id.main_ongoing_activity);
     			String activity = data.getStringExtra("activity");
