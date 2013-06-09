@@ -115,12 +115,21 @@ public class DatabaseHelper extends SQLiteOpenHelper{
  
 	@Override
 	public void onCreate(SQLiteDatabase db) {
- 
+		try {
+			createDataBase();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
  
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
- 
+    	this.getReadableDatabase();
+    	try {
+			copyDataBase();
+		} catch (IOException e) {
+    		throw new Error("Error copying database");
+    	}
 	}
  
         // Add your public helper methods to access and get content from the database.
