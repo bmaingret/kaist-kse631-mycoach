@@ -90,7 +90,7 @@ public class MainActivity extends BaseActivity {
     			/*display activity name*/
     			TextView activityText = (TextView) findViewById(R.id.main_ongoing_activity);
     			String activity = data.getStringExtra("activity");
-    			activityText.setText(getResources().getString(R.id.main_ongoing_activity) + " " + activity);
+    			activityText.setText(getString(R.string.main_ongoing_activity) + " " + activity);
 
     			/* Starting chronometer*/
     			Chronometer chrono = (Chronometer) findViewById(R.id.main_chronometer);
