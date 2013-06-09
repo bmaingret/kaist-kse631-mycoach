@@ -1,7 +1,10 @@
 package edu.kaist.kse631.bmaingret_achin.mycoach;
 
+import java.util.Calendar;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,6 +21,9 @@ public class MainActivity extends BaseActivity {
 	private long activityId = -1;
 	private boolean ongoing = false;
 	private static final String TAG = "MainActivity";
+	private Chronometer chrono = null;
+	
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,10 +54,8 @@ public class MainActivity extends BaseActivity {
         /* History button */
         Button historyButton = (Button) findViewById(R.id.main_historyButton);
         historyButton.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
 				startActivity(intent);	
 			}
@@ -62,10 +66,12 @@ public class MainActivity extends BaseActivity {
         stopActivity.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				chrono.stop();
 				updateUI(false);
+				
 				Toast toast = Toast.makeText(MainActivity.this, "TODO: Record activity", Toast.LENGTH_SHORT);
 				toast.show();
-				//createActivity(time, activityId);
+				saveActivity();
 			}
 		});
         
@@ -111,7 +117,8 @@ public class MainActivity extends BaseActivity {
     			activityText.setText(getString(R.string.main_ongoing_activity) + " " + activity);
 
     			/* Starting chronometer*/
-    			Chronometer chrono = (Chronometer) findViewById(R.id.main_chronometer);
+    			chrono = (Chronometer) findViewById(R.id.main_chronometer);
+    			chrono.setBase(SystemClock.elapsedRealtime());
     			chrono.start();
     		}
     		if (resultCode == RESULT_CANCELED) {
@@ -119,7 +126,9 @@ public class MainActivity extends BaseActivity {
     	}
     }
     
-    protected void createActivity(long activityId, long time){
+    protected void saveActivity(){
+    	long duration = SystemClock.elapsedRealtime()-chrono.getBase();
+    	long datetime =  Calendar.getInstance().getTimeInMillis();
     	
     }
 }
