@@ -6,232 +6,125 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
-/**
- * @author Danny Remington - MacroSolve
- * 
- *         Helper class for sqlite database.
- */
-public class DatabaseHelper extends SQLiteOpenHelper {
-
-    /*
-     * The Android's default system path of the application database in internal
-     * storage. The package of the application is part of the path of the
-     * directory.
-     */
+public class DatabaseHelper extends SQLiteOpenHelper{
+	 
+    //The Android's default system path of your application database.
+    private static String DB_PATH = "/data/data/YOUR_PACKAGE/databases/";
     private static String DB_NAME = "db.sqlite";
-    private static String DB_DIR = "/data/data/android.example/databases/";
-    //private static String DB_DIR = null;
-    private static String DB_PATH = DB_DIR + DB_NAME;
-    private static String OLD_DB_PATH = DB_DIR + "old_" + DB_NAME;
-
+    private SQLiteDatabase myDataBase; 
     private final Context myContext;
-
-    private boolean createDatabase = false;
-    private boolean upgradeDatabase = false;
-
+ 
     /**
-     * Constructor Takes and keeps a reference of the passed context in order to
-     * access to the application assets and resources.
-     * 
+     * Constructor
+     * Takes and keeps a reference of the passed context in order to access to the application assets and resources.
      * @param context
      */
     public DatabaseHelper(Context context) {
-        super(context, DB_NAME, null, context.getResources().getInteger(
-                R.string.databaseVersion));
-        myContext = context;
-        // Get the path of the database that is based on the context.
-        DB_PATH = myContext.getDatabasePath(DB_NAME).getAbsolutePath();
-    }
-
-    /**
-     * Upgrade the database in internal storage if it exists but is not current. 
-     * Create a new empty database in internal storage if it does not exist.
-     */
-    public void initializeDataBase() {
-        /*
-         * Creates or updates the database in internal storage if it is needed
-         * before opening the database. In all cases opening the database copies
-         * the database in internal storage to the cache.
-         */
-        getWritableDatabase();
-
-        if (createDatabase) {
-            /*
-             * If the database is created by the copy method, then the creation
-             * code needs to go here. This method consists of copying the new
-             * database from assets into internal storage and then caching it.
-             */
-            try {
-                /*
-                 * Write over the empty data that was created in internal
-                 * storage with the one in assets and then cache it.
-                 */
-                copyDataBase();
-            } catch (IOException e) {
-                throw new Error("Error copying database");
-            }
-        } else if (upgradeDatabase) {
-            /*
-             * If the database is upgraded by the copy and reload method, then
-             * the upgrade code needs to go here. This method consists of
-             * renaming the old database in internal storage, create an empty
-             * new database in internal storage, copying the database from
-             * assets to the new database in internal storage, caching the new
-             * database from internal storage, loading the data from the old
-             * database into the new database in the cache and then deleting the
-             * old database from internal storage.
-             */
-            try {
-                FileHelper.copyFile(DB_PATH, OLD_DB_PATH);
-                copyDataBase();
-                SQLiteDatabase old_db = SQLiteDatabase.openDatabase(OLD_DB_PATH, null, SQLiteDatabase.OPEN_READWRITE);
-                SQLiteDatabase new_db = SQLiteDatabase.openDatabase(DB_PATH,null, SQLiteDatabase.OPEN_READWRITE);
-                /*
-                 * Add code to load data into the new database from the old
-                 * database and then delete the old database from internal
-                 * storage after all data has been transferred.
-                 */
-            } catch (IOException e) {
-                throw new Error("Error copying database");
-            }
-        }
-
-    }
-
-    /**
-     * Copies your database from your local assets-folder to the just created
-     * empty database in the system folder, from where it can be accessed and
-     * handled. This is done by transfering bytestream.
+    	super(context, DB_NAME, null, 1);
+        this.myContext = context;
+        DB_PATH = myContext.getDatabasePath(DB_NAME).getAbsolutePath();        
+    }	
+ 
+  /**
+     * Creates a empty database on the system and rewrites it with your own database.
      * */
-    private void copyDataBase() throws IOException {
-        /*
-         * Close SQLiteOpenHelper so it will commit the created empty database
-         * to internal storage.
-         */
-        close();
-
-        /*
-         * Open the database in the assets folder as the input stream.
-         */
-        InputStream myInput = myContext.getAssets().open(DB_NAME);
-
-        /*
-         * Open the empty db in interal storage as the output stream.
-         */
-        OutputStream myOutput = new FileOutputStream(DB_PATH);
-
-        /*
-         * Copy over the empty db in internal storage with the database in the
-         * assets folder.
-         */
-        FileHelper.copyFile(myInput, myOutput);
-
-        /*
-         * Access the copied database so SQLiteHelper will cache it and mark it
-         * as created.
-         */
-        getWritableDatabase().close();
+    public void createDataBase() throws IOException{
+    	boolean dbExist = checkDataBase();
+ 
+    	if(dbExist){
+    		//do nothing - database already exist
+    	}else{
+    		//By calling this method and empty database will be created into the default system path
+               //of your application so we are gonna be able to overwrite that database with our database.
+        	this.getReadableDatabase();
+        	try {
+    			copyDataBase();
+    		} catch (IOException e) {
+        		throw new Error("Error copying database");
+        	}
+    	}
     }
-
-    /*
-     * This is where the creation of tables and the initial population of the
-     * tables should happen, if a database is being created from scratch instead
-     * of being copied from the application package assets. Copying a database
-     * from the application package assets to internal storage inside this
-     * method will result in a corrupted database.
-     * <P>
-     * NOTE: This method is normally only called when a database has not already
-     * been created. When the database has been copied, then this method is
-     * called the first time a reference to the database is retrieved after the
-     * database is copied since the database last cached by SQLiteOpenHelper is
-     * different than the database in internal storage.
-     */
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        /*
-         * Signal that a new database needs to be copied. The copy process must
-         * be performed after the database in the cache has been closed causing
-         * it to be committed to internal storage. Otherwise the database in
-         * internal storage will not have the same creation timestamp as the one
-         * in the cache causing the database in internal storage to be marked as
-         * corrupted.
-         */
-        createDatabase = true;
-
-        /*
-         * This will create by reading a sql file and executing the commands in
-         * it.
-         */
-            // try {
-            // InputStream is = myContext.getResources().getAssets().open(
-            // "create_database.sql");
-            //
-            // String[] statements = FileHelper.parseSqlFile(is);
-            //
-            // for (String statement : statements) {
-            // db.execSQL(statement);
-            // }
-            // } catch (Exception ex) {
-            // ex.printStackTrace();
-            // }
-    }
-
+ 
     /**
-     * Called only if version number was changed and the database has already
-     * been created. Copying a database from the application package assets to
-     * the internal data system inside this method will result in a corrupted
-     * database in the internal data system.
+     * Check if the database already exist to avoid re-copying the file each time you open the application.
+     * @return true if it exists, false if it doesn't
      */
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        /*
-         * Signal that the database needs to be upgraded for the copy method of
-         * creation. The copy process must be performed after the database has
-         * been opened or the database will be corrupted.
-         */
-        upgradeDatabase = true;
-
-        /*
-         * Code to update the database via execution of sql statements goes
-         * here.
-         */
-
-        /*
-         * This will upgrade by reading a sql file and executing the commands in
-         * it.
-         */
-        // try {
-        // InputStream is = myContext.getResources().getAssets().open(
-        // "upgrade_database.sql");
-        //
-        // String[] statements = FileHelper.parseSqlFile(is);
-        //
-        // for (String statement : statements) {
-        // db.execSQL(statement);
-        // }
-        // } catch (Exception ex) {
-        // ex.printStackTrace();
-        // }
+    private boolean checkDataBase(){
+    	SQLiteDatabase checkDB = null;
+ 
+    	try{
+    		checkDB = SQLiteDatabase.openDatabase(DB_PATH,
+    				null,
+    				SQLiteDatabase.OPEN_READONLY);
+    	}catch(SQLiteException e){
+    		//database does't exist yet.
+    	}
+    	if(checkDB != null){
+    		checkDB.close();
+    	}
+    	return checkDB != null ? true : false;
     }
-
+ 
     /**
-     * Called everytime the database is opened by getReadableDatabase or
-     * getWritableDatabase. This is called after onCreate or onUpgrade is
-     * called.
-     */
-    @Override
-    public void onOpen(SQLiteDatabase db) {
-        super.onOpen(db);
+     * Copies your database from your local assets-folder to the just created empty database in the
+     * system folder, from where it can be accessed and handled.
+     * This is done by transfering bytestream.
+     * */
+    private void copyDataBase() throws IOException{
+ 
+    	//Open your local db as the input stream
+    	InputStream myInput = myContext.getAssets().open(DB_NAME);
+ 
+    	// Path to the just created empty db
+    	String outFileName = DB_PATH;
+ 
+    	//Open the empty db as the output stream
+    	OutputStream myOutput = new FileOutputStream(outFileName);
+ 
+    	//transfer bytes from the inputfile to the outputfile
+    	byte[] buffer = new byte[1024];
+    	int length;
+    	while ((length = myInput.read(buffer))>0){
+    		myOutput.write(buffer, 0, length);
+    	}
+ 
+    	//Close the streams
+    	myOutput.flush();
+    	myOutput.close();
+    	myInput.close();
     }
-
-    /*
-     * Add your public helper methods to access and get content from the
-     * database. You could return cursors by doing
-     * "return myDataBase.query(....)" so it'd be easy to you to create adapters
-     * for your views.
-     */
-
+ 
+    public void openDataBase() throws SQLException{
+    	//Open the database
+        String myPath = DB_PATH;
+    	myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+    }
+ 
+    @Override
+	public synchronized void close() {
+    	    if(myDataBase != null)
+    		    myDataBase.close();
+    	    super.close();
+	}
+ 
+	@Override
+	public void onCreate(SQLiteDatabase db) {
+ 
+	}
+ 
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+ 
+	}
+ 
+        // Add your public helper methods to access and get content from the database.
+       // You could return cursors by doing "return myDataBase.query(....)" so it'd be easy
+       // to you to create adapters for your views.
+ 
 }

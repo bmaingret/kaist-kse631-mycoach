@@ -1,5 +1,7 @@
 package edu.kaist.kse631.bmaingret_achin.mycoach;
 
+import java.util.List;
+
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
@@ -9,8 +11,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class NewActivityActivity extends BaseActivity {
@@ -21,6 +26,7 @@ public class NewActivityActivity extends BaseActivity {
 		setContentView(R.layout.activity_new_activity);
 		setupActionBar();
 		
+		/* Start button Listener*/
 		ImageButton startButton = (ImageButton) findViewById(R.id.newActivity_start_button);
 		startButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -32,8 +38,16 @@ public class NewActivityActivity extends BaseActivity {
 				finish();
 			}
 		});
+		
+		/* Populate activity list*/
+		ActivitiesTableHelper helper = new ActivitiesTableHelper(getApplicationContext());
+		List<String> activityList = helper.getActivityList();
+		Spinner activitySpinner= (Spinner) findViewById(R.id.newActivity_activity_list);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, activityList);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		activitySpinner.setAdapter(adapter);
 	}
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {

@@ -3,7 +3,6 @@
 
     
     <string name="app_name">myCoach</string>
-    
     <string name="databaseVersion" format="integer">1</string>
     
     <string name="action_settings">Settings</string>
