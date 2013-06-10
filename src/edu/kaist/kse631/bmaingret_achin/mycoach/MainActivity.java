@@ -9,6 +9,8 @@ import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
@@ -40,7 +42,7 @@ public class MainActivity extends BaseActivity {
         
         setContentView(R.layout.activity_main);
         
-        /* Hiding the part used when an activity is going on */
+        /* Storing views and update the UI */
         startActivitySpecifics = (View) findViewById(R.id.start_activity_layout);
         activityStartedSpecifics = (View) findViewById(R.id.activity_started_layout);
         updateUI(null);
@@ -92,6 +94,19 @@ public class MainActivity extends BaseActivity {
         
         /* History listview */
         historyView = (ListView) findViewById(R.id.main_historyListView);
+        historyView.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+				intent.putExtra("activityId", id);
+				startActivity(intent);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+			}
+		});
         updateHistory();
     }
     
