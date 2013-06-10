@@ -50,10 +50,10 @@ public class NewProjectActivity extends BaseActivity {
 //					intent.putExtras(bundle);
 					SharedPreferences prefs = getApplicationContext().getSharedPreferences("myCoach", Context.MODE_PRIVATE);
 					SharedPreferences.Editor editor = prefs.edit();
-					editor.putInt("current_activity", Integer.parseInt(current_act));
-					editor.putInt("current_avg", Integer.parseInt(current_avg));
-					editor.putInt("goal_activity", Integer.parseInt(goal_act));
-					editor.putInt("goal_avg", Integer.parseInt(goal_avg));
+					editor.putInt(C.CURRENT_ACTIVITY, Integer.parseInt(current_act));
+					editor.putInt(C.CURRENT_AVERAGE, Integer.parseInt(current_avg));
+					editor.putInt(C.GOAL_ACTIVITY, Integer.parseInt(goal_act));
+					editor.putInt(C.GOAL_AVERAGE, Integer.parseInt(goal_avg));
 					editor.commit();
 					startActivity(intent);
 				}else{

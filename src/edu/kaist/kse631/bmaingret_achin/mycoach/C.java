@@ -4,4 +4,9 @@ public class C {
 	public static final String START_ACTIVITY = "start_activity";
 	public static final int REQUEST_START_ACTIVITY = 1;
 	public static final int DB_VERSION = 1;
+	public static final String CURRENT_ACTIVITY = "current_activity";
+	public static final String CURRENT_AVERAGE = "current_avg";
+	public static final String GOAL_ACTIVITY = "goal_activity";
+	public static final String GOAL_AVERAGE = "goal_avg";
+	
 }
