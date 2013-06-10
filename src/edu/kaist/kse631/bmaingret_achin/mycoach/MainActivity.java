@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -28,7 +29,7 @@ public class MainActivity extends BaseActivity {
 	private static final String TAG = "MainActivity";
 	private Chronometer chrono = null;
 	private ListView historyView = null;
-	
+	long datetime  = 0;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,17 +95,12 @@ public class MainActivity extends BaseActivity {
         
         /* History listview */
         historyView = (ListView) findViewById(R.id.main_historyListView);
-        historyView.setOnItemSelectedListener(new OnItemSelectedListener() {
-
+        historyView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+			public void onItemClick(AdapterView<?> parent, View view, int position,	long id) {
+				Intent intent = new Intent(MainActivity.this, ActivityDetailsActivity.class);
 				intent.putExtra("activityId", id);
-				startActivity(intent);
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
+				startActivity(intent);	
 			}
 		});
         updateHistory();
@@ -147,6 +143,9 @@ public class MainActivity extends BaseActivity {
     			chrono = (Chronometer) findViewById(R.id.main_chronometer);
     			chrono.setBase(SystemClock.elapsedRealtime());
     			chrono.start();
+    			
+    			/* Recording start datetime */
+    			datetime =  System.currentTimeMillis();
     		}
     		if (resultCode == RESULT_CANCELED) {
     		}
@@ -155,7 +154,6 @@ public class MainActivity extends BaseActivity {
     
     protected void saveActivity(){
     	long duration = SystemClock.elapsedRealtime()-chrono.getBase();
-    	long datetime =  Calendar.getInstance().getTimeInMillis();
     	UserActivitiesTableHelper helper = new UserActivitiesTableHelper(this);
     	helper.saveActivity(activityId, datetime, duration);
     }

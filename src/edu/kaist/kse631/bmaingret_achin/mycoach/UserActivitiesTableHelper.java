@@ -21,6 +21,9 @@ public class UserActivitiesTableHelper {
 			+ "FOREIGN KEY(" + COLUMN_ACTIVITY_ID 
 				+ ") REFERENCES " + ActivitiesTableHelper.TABLE_NAME + "(" + ActivitiesTableHelper.COLUMN_ID + ")"
 			+ " );";
+	public static final String SQL_JOIN = "SELECT UA.datetime as datetime, UA.duration as duration, UA._id as _id, A.activity as activity" 
+			+ " FROM " + TABLE_NAME + " as UA, " + ActivitiesTableHelper.TABLE_NAME + " as A "
+			+ "ON UA." + COLUMN_ACTIVITY_ID + "=A." + ActivitiesTableHelper.COLUMN_ID + ";";
 	
 	private static final String TAG = "UserActivitiesTableHelper";
 	private DatabaseHelper dbHelper= null;
@@ -44,12 +47,23 @@ public class UserActivitiesTableHelper {
 
 	public Cursor getHistory() {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		String query = "SELECT * FROM " + TABLE_NAME + " as UA, " + ActivitiesTableHelper.TABLE_NAME + " as A "
-				+ "ON UA." + COLUMN_ACTIVITY_ID + "=A." + ActivitiesTableHelper.COLUMN_ID + ";";
+		String query = SQL_JOIN;
 		Log.d(TAG, "Executing: " + query);
 		Cursor history = db.rawQuery(query, null);
 		Log.d(TAG, "History: " + history.getCount() + "entries found");
 		try{if(null != db){ db.close(); db = null;}}catch(Exception e){}
 		return history;
+	}
+
+	public Cursor getUserActivity(long activityId) {
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		String query = SQL_JOIN.substring(0, SQL_JOIN.length()-1)
+				+ " WHERE UA._id=" + String.valueOf(activityId)
+				+ ";";
+		Log.d(TAG, "Executing: " + query);
+		Cursor history = db.rawQuery(query, null);
+		Log.d(TAG, "UserActivity: " + history.getCount() + "entryfound");
+		try{if(null != db){ db.close(); db = null;}}catch(Exception e){}
+		return history;	
 	}
 }

@@ -57,4 +57,11 @@
 	<string name="main_elapsed_time">Elapsed time:</string>
 	<string name="main_ongoing_activity">Ongoing activity:</string>
 	<string name="main_recording">Recording...</string>
+	<string name="details_type_label">Activity: </string>
+	<string name="details_date_label">Date: </string>
+	<string name="details_duration_label">Duration: </string>
+	<string name="details_location_label">Location: </string>
+	<string name="details_calories_label">Calories: </string>
+	<string name="details_continue_button">Continue</string>
+
 </resources>
