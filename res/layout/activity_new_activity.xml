@@ -14,6 +14,7 @@
 
     <Spinner
         android:id="@+id/newActivity_activity_list"
+        style="@style/DropDownListView.Mycoachstyle"
         android:layout_column="3"
         android:layout_columnSpan="7"
         android:layout_gravity="fill_horizontal"

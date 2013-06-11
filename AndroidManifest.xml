@@ -14,7 +14,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/appName"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/Theme.Mycoachstyle" >
         <activity
             android:name="edu.kaist.kse631.bmaingret_achin.mycoach.StartActivity"
             android:label="@string/title_activity_start" >
