@@ -19,6 +19,7 @@ public class StartActivity extends BaseActivity {
 		if (projectCreatedOrStarted && !C.DEBUG){
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
+			finish();
 		}
 		else{
 			setContentView(R.layout.activity_start);
