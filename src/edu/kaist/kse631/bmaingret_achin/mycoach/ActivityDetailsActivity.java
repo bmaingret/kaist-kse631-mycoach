@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.view.Menu;
 import android.view.View;
@@ -31,9 +32,11 @@ public class ActivityDetailsActivity extends Activity {
 		
 		/* Filling the fields */
 		if (activity.moveToFirst()){
+			/* Activity type*/
 			TextView type = (TextView) findViewById(R.id.details_type);
 			type.setText(activity.getString(activity.getColumnIndex(ActivitiesTableHelper.COLUMN_ACTIVITY)));
 			
+			/* Duration */
 			TextView durationTextView = (TextView) findViewById(R.id.details__duration);
 			long duration = activity.getLong(activity.getColumnIndex(UserActivitiesTableHelper.COLUMN_DURATION));
 			String durationStr = String.format("%02d:%02d::%d", 
@@ -43,12 +46,27 @@ public class ActivityDetailsActivity extends Activity {
 			);
 			durationTextView.setText(durationStr);
 			
+			/* Date-time*/
 			TextView dateTextView = (TextView) findViewById(R.id.details_date);
 			long datetime = activity.getLong(activity.getColumnIndex(UserActivitiesTableHelper.COLUMN_DATETIME));
 			Date date = new Date(datetime);
 			DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 			String dateFormatted = formatter.format(date);
 			dateTextView.setText(dateFormatted);
+			
+			/* Calories */
+			int[] base = {
+					activity.getInt(activity.getColumnIndex(ActivitiesTableHelper.COLUMN_W1)),
+					activity.getInt(activity.getColumnIndex(ActivitiesTableHelper.COLUMN_W2)),
+					activity.getInt(activity.getColumnIndex(ActivitiesTableHelper.COLUMN_W3)),
+					activity.getInt(activity.getColumnIndex(ActivitiesTableHelper.COLUMN_W4))				
+			};
+			SharedPreferences prefs = getSharedPreferences(C.PREF, MODE_PRIVATE);
+			
+			int weight = 60;
+			int calories = CaloriesHelper.getCalories(weight, base, duration);
+			TextView caloriesTextView = (TextView) findViewById(R.id.details_calories);
+			caloriesTextView.setText(String.valueOf(calories));
 		}
 		
 		/*Continue button */
