@@ -21,9 +21,7 @@ public class UserActivitiesTableHelper {
 			+ "FOREIGN KEY(" + COLUMN_ACTIVITY_ID 
 				+ ") REFERENCES " + ActivitiesTableHelper.TABLE_NAME + "(" + ActivitiesTableHelper.COLUMN_ID + ")"
 			+ " );";
-	public static final String SQL_JOIN = "SELECT "
-			+" UA.datetime as datetime, UA.duration as duration, UA._id as _id, "
-			+" A.activity as activity, A.w1 as w1, A.w2 as w2, A.w3 as w3, A.w4 as w4 " 
+	public static final String SQL_JOIN = "SELECT UA.datetime as datetime, UA.duration as duration, UA._id as _id, A.activity as activity" 
 			+ " FROM " + TABLE_NAME + " as UA, " + ActivitiesTableHelper.TABLE_NAME + " as A "
 			+ "ON UA." + COLUMN_ACTIVITY_ID + "=A." + ActivitiesTableHelper.COLUMN_ID + ";";
 	

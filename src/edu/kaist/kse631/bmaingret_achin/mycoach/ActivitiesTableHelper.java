@@ -24,7 +24,6 @@ public class ActivitiesTableHelper{
 	public static final String COLUMN_W4 = "w4";
 	public static final String[] ALL_COLUMNS = new String[]{COLUMN_ID, COLUMN_ACTIVITY, COLUMN_W1, COLUMN_W3, COLUMN_W3, COLUMN_W4 };
 
-	/* Ref weight in kg */
 	public static final int W1 = 59;
 	public static final int W2 = 70;
 	public static final int W3 = 82;
