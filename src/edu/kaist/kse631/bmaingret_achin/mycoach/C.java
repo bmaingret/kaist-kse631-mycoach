@@ -17,8 +17,9 @@ public class C {
 	public static final String P_PROJECT_STATE = "project_state";
 	public static final String P_WEIGHT = "weight";
 	public static final String PREF = "myCoach";
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 	public static final String DETAILS_FROM = "details_from";
+	public static final String DETAILS_FROM_MAIN = "from_main";
 	;
 	
 }

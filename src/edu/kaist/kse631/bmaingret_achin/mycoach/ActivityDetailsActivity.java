@@ -23,6 +23,13 @@ public class ActivityDetailsActivity extends Activity {
 		setContentView(R.layout.activity_activity_details);
 		Intent intent = getIntent();
 		
+		/*Continue button */
+		String from = intent.getStringExtra(C.DETAILS_FROM);
+		if (null == from){
+			Button continueButton = (Button) findViewById(R.id.details_continue_button);
+			continueButton.setVisibility(View.GONE);
+		}
+		
 		/* Retrieving userAactivityId*/
 		long activityId = intent.getLongExtra("activityId", -1);
 		
@@ -50,7 +57,7 @@ public class ActivityDetailsActivity extends Activity {
 			TextView dateTextView = (TextView) findViewById(R.id.details_date);
 			long datetime = activity.getLong(activity.getColumnIndex(UserActivitiesTableHelper.COLUMN_DATETIME));
 			Date date = new Date(datetime);
-			DateFormat formatter = new SimpleDateFormat(" MM/dd/yyyy at HH:mm");
+			DateFormat formatter = new SimpleDateFormat(" MM/dd/yyyy 'at' HH:mm");
 			String dateFormatted = formatter.format(date);
 			dateTextView.setText(dateFormatted);
 			
@@ -69,12 +76,7 @@ public class ActivityDetailsActivity extends Activity {
 			caloriesTextView.setText(String.valueOf(calories));
 		}
 		
-		/*Continue button */
-		String from = intent.getStringExtra(C.DETAILS_FROM);
-		if (null == from){
-			Button continueButton = (Button) findViewById(R.id.details_continue_button);
-			continueButton.setVisibility(View.GONE);
-		}
+
 		
 	}
 }

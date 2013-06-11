@@ -79,7 +79,9 @@ public class MainActivity extends BaseActivity {
 				Toast toast = Toast.makeText(MainActivity.this, "TODO: Record activity", Toast.LENGTH_SHORT);
 				toast.show();
 				saveActivity();
-				updateHistory();
+				Intent intent = new Intent(MainActivity.this, ActivityDetailsActivity.class);
+				intent.putExtra(C.DETAILS_FROM, C.DETAILS_FROM_MAIN);
+				startActivity(intent);
 			}
 		});
         
