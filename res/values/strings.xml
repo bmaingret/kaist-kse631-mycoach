@@ -63,5 +63,12 @@
 	<string name="details_location_label">Location: </string>
 	<string name="details_calories_label">Calories: </string>
 	<string name="details_continue_button">Continue</string>
+	<string name="level_up_time_past">[weeks] weeks has past!</string>
+	<string name="level_up_percent">You have achieved [percentage]% of your objectives.</string>
+	<string name="level_up_label1">What do you want to do?</string>
+	<string name="level_up_label2">Level up</string>
+	<string name="level_up_label3">Level down</string>
+	<string name="level_up_label4">Remain the same</string>
+	<string name="levelup_btnContinue">Continue</string>
 
 </resources>
