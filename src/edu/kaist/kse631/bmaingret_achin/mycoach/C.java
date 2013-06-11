@@ -20,6 +20,8 @@ public class C {
 	public static final boolean DEBUG = false;
 	public static final String DETAILS_FROM = "details_from";
 	public static final String DETAILS_FROM_MAIN = "from_main";
+	public static final String INTENT_FILTER_BC = "edu.kaist.kse631.bmaingret_achin.mycoach";
+	public static final long ONE_WEEK_MILLIS = 604800000L; 
 	;
 	
 }
