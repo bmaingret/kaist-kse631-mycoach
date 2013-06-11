@@ -156,7 +156,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/projSetting_dayCheckbox_Tuesday" />
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -173,7 +172,6 @@
             android:text="@string/m_t_w_t_f_s_s"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:typeface="serif" />
-
     </RelativeLayout>
 
     <TextView
@@ -186,7 +184,7 @@
         android:textColor="#777"
         android:textSize="14sp"
         android:typeface="serif" />
-    
+
     <View
         android:layout_width="fill_parent"
         android:layout_height="0.5dp"
@@ -229,20 +227,19 @@
         android:textColor="#444"
         android:textSize="14sp"
         android:typeface="serif" />
-    
-        <View
+
+    <View
         android:layout_width="fill_parent"
         android:layout_height="0.5dp"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:background="#ccc" />
 
-<Button
-    android:id="@+id/projSetting_save_project"
-    android:layout_width="match_parent"
-    android:layout_height="33dp"
-    android:text="@string/save_project"
-    android:textSize="12sp"
-    android:typeface="serif" />
+    <Button
+        android:id="@+id/projSetting_save_project"
+        style="@style/flatButton"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:text="@string/save_project" />
 
 </LinearLayout>
