@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -25,9 +26,19 @@ public class ActivityDetailsActivity extends Activity {
 		
 		/*Continue button */
 		String from = intent.getStringExtra(C.DETAILS_FROM);
+		Button continueButton = (Button) findViewById(R.id.details_continue_button);
 		if (null == from){
-			Button continueButton = (Button) findViewById(R.id.details_continue_button);
 			continueButton.setVisibility(View.GONE);
+		}
+		else{
+			continueButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(ActivityDetailsActivity.this, MainActivity.class);
+					startActivity(intent);
+					finish();
+				}
+			});
 		}
 		
 		/* Retrieving userAactivityId*/

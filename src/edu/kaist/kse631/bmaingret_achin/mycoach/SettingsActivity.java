@@ -130,8 +130,10 @@ public class SettingsActivity extends PreferenceActivity {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.pref_general);
 			
-			CharSequence[] entries = new String[]{"test"};
-			CharSequence[] values = new String[]{"test"};
+			List<String> calendarList = CalendarsHelper.getCalendarList(getActivity());
+			
+			CharSequence[] entries = calendarList.toArray(new String[calendarList.size()]);
+			CharSequence[] values = calendarList.toArray(new String[calendarList.size()]);
 			//TODO Generate entries and values from calendar list
 	        ListPreference listPref = (ListPreference)findPreference("calendar_list");
 	        listPref.setEntries(entries);
