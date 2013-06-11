@@ -62,4 +62,16 @@ public class CaloriesHelper {
 		Log.d(TAG, "ZeroV: "+ zeroV);
 		return zeroV;
 	}
+	
+	protected static double poundToKg(double weightInPound){
+		return weightInPound * 0.45359237;
+	}
+	
+	protected static double[] basisToKg(int[] basis){
+		double basisKg[] = new double[basis.length];
+		for (int i = 0; i<basis.length; i++){
+			basisKg[i] = poundToKg(basis[i]);
+		}
+		return basisKg;
+	}
 }
