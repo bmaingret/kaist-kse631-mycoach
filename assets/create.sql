@@ -248,5 +248,3 @@ INSERT INTO "activities" VALUES(246,'Taking out trash',177,211,245,279);
 INSERT INTO "activities" VALUES(247,'Walking, pushing a wheelchair',236,281,327,372);
 INSERT INTO "activities" VALUES(248,'Teach physical education,exercise class',236,281,327,372);
 INSERT INTO "activities" VALUES(249,'Teach exercise classes (& participate)',384,457,531,605);
-
-
