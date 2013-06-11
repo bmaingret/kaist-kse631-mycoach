@@ -32,14 +32,14 @@ public class NewProjectActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				String current_act = ((EditText) findViewById(R.id.newProject_numActLastWeek)).getText().toString();
 				String current_avg = ((EditText) findViewById(R.id.newProject_current_avgDuration)).getText().toString();
 				String goal_act = ((EditText) findViewById(R.id.newProject_goalNumAct)).getText().toString();
 				String goal_avg = ((EditText) findViewById(R.id.newProject_goalAvgDuration)).getText().toString();
+				String weight = ((EditText) findViewById(R.id.newProject_weight)).getText().toString();
 				
 				if(current_act.length() != 0 && current_avg.length() != 0 && goal_act.length() != 0
-						&& goal_avg.length() != 0){
+						&& goal_avg.length() != 0 && weight.length() != 0){
 					
 					Intent intent = new Intent(NewProjectActivity.this, ProjectSettingsActivity.class);
 //					Bundle bundle = new Bundle();
@@ -54,6 +54,7 @@ public class NewProjectActivity extends BaseActivity {
 					editor.putInt(C.P_CURRENT_AVERAGE, Integer.parseInt(current_avg));
 					editor.putInt(C.P_GOAL_ACTIVITY, Integer.parseInt(goal_act));
 					editor.putInt(C.P_GOAL_AVERAGE, Integer.parseInt(goal_avg));
+					editor.putInt(C.P_WEIGHT, Integer.parseInt(weight));
 					editor.putString(C.P_PROJECT_STATE, C.P_CREATED);
 					editor.commit();
 					startActivity(intent);

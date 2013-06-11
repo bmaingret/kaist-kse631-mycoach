@@ -63,7 +63,7 @@ public class ActivityDetailsActivity extends Activity {
 			};
 			SharedPreferences prefs = getSharedPreferences(C.PREF, MODE_PRIVATE);
 			
-			int weight = 60;
+			int weight = prefs.getInt(C.P_WEIGHT, 0);
 			int calories = CaloriesHelper.getCalories(weight, base, duration);
 			TextView caloriesTextView = (TextView) findViewById(R.id.details_calories);
 			caloriesTextView.setText(String.valueOf(calories));
