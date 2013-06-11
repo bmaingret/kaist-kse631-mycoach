@@ -39,7 +39,7 @@ public class ActivityDetailsActivity extends Activity {
 			/* Duration */
 			TextView durationTextView = (TextView) findViewById(R.id.details__duration);
 			long duration = activity.getLong(activity.getColumnIndex(UserActivitiesTableHelper.COLUMN_DURATION));
-			String durationStr = String.format("%02d:%02d::%d", 
+			String durationStr = String.format(" %02d:%02d'%d\"", 
 					TimeUnit.MILLISECONDS.toHours(duration),
 				    TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration)),
 				    TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.HOURS.toSeconds(TimeUnit.MILLISECONDS.toHours(duration)) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))
@@ -50,7 +50,7 @@ public class ActivityDetailsActivity extends Activity {
 			TextView dateTextView = (TextView) findViewById(R.id.details_date);
 			long datetime = activity.getLong(activity.getColumnIndex(UserActivitiesTableHelper.COLUMN_DATETIME));
 			Date date = new Date(datetime);
-			DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+			DateFormat formatter = new SimpleDateFormat(" MM/dd/yyyy at HH:mm");
 			String dateFormatted = formatter.format(date);
 			dateTextView.setText(dateFormatted);
 			
