@@ -40,8 +40,12 @@ public class MainActivity extends BaseActivity {
         	ongoing = savedInstanceState.getBoolean("ongoing", false);
         	Log.d(TAG, "Instance state restored");
         }
-        
+
         setContentView(R.layout.activity_main);
+
+        /* Alarm manager */
+		ReminderAlarm alarm = new ReminderAlarm(this);
+		Log.d(TAG, "Reminder set");
         
         /* Storing views and update the UI */
         startActivitySpecifics = (View) findViewById(R.id.start_activity_layout);
