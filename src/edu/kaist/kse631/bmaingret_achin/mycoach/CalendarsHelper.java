@@ -1,13 +1,17 @@
 package edu.kaist.kse631.bmaingret_achin.mycoach;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract.Calendars;
+import android.provider.CalendarContract.Events;
 import android.provider.CalendarContract.Instances;
 import android.util.Log;
 
@@ -67,4 +71,20 @@ public class CalendarsHelper {
 		return calendarList;
 	}
 
+	public static long addEvent(Context context, long calID, long startMillis, long endMillis){
+		ContentResolver cr = context.getContentResolver();
+		ContentValues values = new ContentValues();
+		values.put(Events.DTSTART, startMillis);
+		values.put(Events.DTEND, endMillis);
+		values.put(Events.TITLE, "myCoach Exercise");
+		values.put(Events.DESCRIPTION, "Workout");
+		values.put(Events.CALENDAR_ID, calID);
+		values.put(Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
+		Uri uri = cr.insert(Events.CONTENT_URI, values);
+
+		// get the event ID that is the last element in the Uri
+		long eventID = Long.parseLong(uri.getLastPathSegment());
+		Log.d(TAG, "Event created: " + eventID);
+		return eventID;
+	}
 }
