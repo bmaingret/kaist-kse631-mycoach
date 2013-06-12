@@ -86,9 +86,10 @@ public class MainActivity extends BaseActivity {
 				
 				Toast toast = Toast.makeText(MainActivity.this, "TODO: Record activity", Toast.LENGTH_SHORT);
 				toast.show();
-				saveActivity();
+				long id = saveActivity();
 				Intent intent = new Intent(MainActivity.this, ActivityDetailsActivity.class);
 				intent.putExtra(C.DETAILS_FROM, C.DETAILS_FROM_MAIN);
+				intent.putExtra("activityId", id);
 				startActivity(intent);
 			}
 		});
@@ -163,10 +164,10 @@ public class MainActivity extends BaseActivity {
     	}
     }
     
-    protected void saveActivity(){
+    protected long saveActivity(){
     	long duration = SystemClock.elapsedRealtime()-chrono.getBase();
     	UserActivitiesTableHelper helper = new UserActivitiesTableHelper(this);
-    	helper.saveActivity(activityId, datetime, duration);
+    	return helper.saveActivity(activityId, datetime, duration);
     }
     
     protected void updateHistory(){

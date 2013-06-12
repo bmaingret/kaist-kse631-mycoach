@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 public class ActivityDetailsActivity extends Activity {
 
-	private static final String TAG = "AcitvityDetails";
+	private static final String TAG = "ActivityDetails";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +90,8 @@ public class ActivityDetailsActivity extends Activity {
 			TextView caloriesTextView = (TextView) findViewById(R.id.details_calories);
 			caloriesTextView.setText(String.valueOf(calories));
 		}
-		
-
-		
+		else{
+			Log.e(TAG, "Activity not found!");
+		}		
 	}
 }

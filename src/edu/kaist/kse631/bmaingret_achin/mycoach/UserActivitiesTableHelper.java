@@ -36,7 +36,7 @@ public class UserActivitiesTableHelper {
 		this.context = context;
 	}
 		
-	public void saveActivity(long activityId, long datetime, long duration){
+	public long saveActivity(long activityId, long datetime, long duration){
 		ContentValues values = new ContentValues();
 		values.put(COLUMN_ACTIVITY_ID, activityId);
 		values.put(COLUMN_DATETIME, datetime);
@@ -45,6 +45,7 @@ public class UserActivitiesTableHelper {
 		long id = db.insert(TABLE_NAME, null, values);
 		Log.d(TAG, "Activity saved:" + id);
 		try{if(null != db){ db.close(); db = null;}}catch(Exception e){}
+		return id;
 	}
 
 	public Cursor getHistory() {
