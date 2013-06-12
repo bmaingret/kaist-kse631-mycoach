@@ -71,5 +71,6 @@
     <string name="newProject_weight_label">Your weight (kg): </string>
     <string name="newProject_about">About you</string>
     <string name="appName">myCoach</string>
+    <string name="tipsSave">Save</string>
 
 </resources>
