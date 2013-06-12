@@ -16,9 +16,16 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.AdapterView.OnItemClickListener;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
+import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Build;
 
@@ -29,11 +36,25 @@ public class HistoryActivity extends Activity {
 	private XYMultipleSeriesDataset dataset;     
 	private XYSeriesRenderer visitsRenderer;    
 	private XYMultipleSeriesRenderer multiRenderer;
+	private ListView historyView = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_history);
+		//Populating history listview
+		/* History listview */
+        historyView = (ListView) findViewById(R.id.history_listview);
+        historyView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,	long id) {
+				Intent intent = new Intent(HistoryActivity.this, ActivityDetailsActivity.class);
+				intent.putExtra("activityId", id);
+				startActivity(intent);	
+			}
+		});
+        updateHistory();
+		
 		// Show the Up button in the action bar.
 		setupActionBar();
 		setupChart();
@@ -110,6 +131,19 @@ public class HistoryActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	protected void updateHistory(){
+        UserActivitiesTableHelper helper = new UserActivitiesTableHelper(this);
+        Cursor history = helper.getHistory();
+        String[] from = new String[]{ActivitiesTableHelper.COLUMN_ACTIVITY};
+        int[] to = {android.R.id.text1};
+        SimpleCursorAdapter historyAdapter = new SimpleCursorAdapter(this,
+        		android.R.layout.simple_list_item_1,
+        		history,
+        		from,
+        		to);
+        historyView.setAdapter(historyAdapter);
+    }
 
 
 private class ChartTask extends AsyncTask<Void, String, Void>{         
