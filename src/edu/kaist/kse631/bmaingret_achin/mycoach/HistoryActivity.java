@@ -1,5 +1,8 @@
 package edu.kaist.kse631.bmaingret_achin.mycoach;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 import org.achartengine.ChartFactory;
@@ -21,7 +24,9 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -135,13 +140,27 @@ public class HistoryActivity extends Activity {
 	protected void updateHistory(){
         UserActivitiesTableHelper helper = new UserActivitiesTableHelper(this);
         Cursor history = helper.getHistory();
-        String[] from = new String[]{ActivitiesTableHelper.COLUMN_ACTIVITY};
-        int[] to = {android.R.id.text1};
+        String[] from = new String[]{ActivitiesTableHelper.COLUMN_ACTIVITY, UserActivitiesTableHelper.COLUMN_DATETIME};
+        int[] to = {android.R.id.text1, android.R.id.text2};
         SimpleCursorAdapter historyAdapter = new SimpleCursorAdapter(this,
-        		android.R.layout.simple_list_item_1,
+        		android.R.layout.simple_list_item_2,
         		history,
         		from,
         		to);
+        historyAdapter.setViewBinder(new ViewBinder() {
+            public boolean setViewValue(View aView, Cursor aCursor, int aColumnIndex) {
+                if (aColumnIndex == aCursor.getColumnIndex(UserActivitiesTableHelper.COLUMN_DATETIME)) {
+                        long datetime= aCursor.getLong(aColumnIndex);
+                        TextView textView = (TextView) aView;
+            			Date date = new Date(datetime);
+            			DateFormat formatter = new SimpleDateFormat(" MM/dd/yyyy");
+            			String dateFormatted = formatter.format(date);
+                        textView.setText(dateFormatted);
+                        return true;
+                 }
+                 return false;
+            }
+        });
         historyView.setAdapter(historyAdapter);
     }
 
