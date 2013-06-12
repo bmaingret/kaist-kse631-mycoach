@@ -37,7 +37,11 @@
     <string name="projSetting_lbl3">"You will need at least 0 week(s) to achieve your goal"</string>
     <string name="projSetting_lbl4">weeks to achieve your goal</string>
     <string name="projSetting_lbl5">Start now by planning for the next 3 weeks</string>
-    <string name="m_t_w_t_f_s_s">M      T       W      T       F       S       S</string>
+	<string name="m">M</string>
+	<string name="t">T</string>
+	<string name="w">W</string>
+	<string name="f">F</string>
+	<string name="s">S</string>
     <string name="activity">Activity</string>
     <string name="fast_walking_jogging">Fast Walking / Jogging</string>
     <string name="cycling">Cycling</string>

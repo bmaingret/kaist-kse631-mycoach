@@ -110,74 +110,152 @@
             android:textSize="13sp"
             android:typeface="serif" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="22dp"
-            android:gravity="center" >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal" >
 
-            <CheckBox
-                android:id="@+id/projSetting_dayCheckbox_Monday"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true" />
+                android:layout_weight="1"
+                android:orientation="vertical" >
 
-            <CheckBox
-                android:id="@+id/projSetting_dayCheckbox_Saturday"
+                <CheckBox
+                    android:id="@+id/projSetting_dayCheckbox_Monday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/mon_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/m" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/projSetting_dayCheckbox_Friday" />
+                android:layout_weight="1"
+                android:orientation="vertical" >
 
-            <CheckBox
-                android:id="@+id/projSetting_dayCheckbox_Sunday"
+                <CheckBox
+                    android:id="@+id/projSetting_dayCheckbox_Tuesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/tue_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/t" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/projSetting_dayCheckbox_Saturday" />
+                android:layout_weight="1"
+                android:orientation="vertical" >
 
-            <CheckBox
-                android:id="@+id/projSetting_dayCheckbox_Tuesday"
+                <CheckBox
+                    android:id="@+id/projSetting_dayCheckbox_Wednesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/wen_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/w" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/projSetting_dayCheckbox_Monday" />
+                android:layout_weight="1"
+                android:orientation="vertical" >
 
-            <CheckBox
-                android:id="@+id/projSetting_dayCheckbox_Thursday"
+                <CheckBox
+                    android:id="@+id/projSetting_dayCheckbox_Thursday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/thu_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/t" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/projSetting_dayCheckbox_Wednesday" />
+                android:layout_weight="1"
+                android:orientation="vertical" >
 
-            <CheckBox
-                android:id="@+id/projSetting_dayCheckbox_Friday"
+                <CheckBox
+                    android:id="@+id/projSetting_dayCheckbox_Friday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/fri_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/f" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/projSetting_dayCheckbox_Thursday" />
+                android:layout_weight="1"
+                android:orientation="vertical" >
 
-            <CheckBox
-                android:id="@+id/projSetting_dayCheckbox_Wednesday"
+                <CheckBox
+                    android:id="@+id/projSetting_dayCheckbox_Saturday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+
+                <TextView
+                    android:id="@+id/sat_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/s" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/projSetting_dayCheckbox_Tuesday" />
-        </RelativeLayout>
+                android:layout_weight="1"
+                android:orientation="vertical" >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+                <CheckBox
+                    android:id="@+id/projSetting_dayCheckbox_Sunday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:paddingLeft="43dp"
-                android:text="@string/m_t_w_t_f_s_s"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:typeface="serif" />
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/s_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/s" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
