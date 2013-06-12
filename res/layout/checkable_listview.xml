@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edu.kaist.kse631.bmaingret_achin.mycoach.CheckableLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="5dip" >
+
+    <CheckedTextView
+        android:id="@+id/activity"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+        android:ellipsize="marquee"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</edu.kaist.kse631.bmaingret_achin.mycoach.CheckableLinearLayout>
