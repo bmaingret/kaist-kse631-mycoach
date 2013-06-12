@@ -23,7 +23,12 @@ public class ReminderAlarm {
 		broadcastReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context c, Intent i) {
-				Toast.makeText(c, "Rise and Shine!", Toast.LENGTH_LONG).show();
+				ProjectManager manager = new ProjectManager(c);
+				if (!manager.isProjectPaused()){
+					if (manager.longTimeNoWork()){
+						Toast.makeText(c, "Remember to work out!", Toast.LENGTH_SHORT).show();
+					}
+				}
 			}
 		};
 

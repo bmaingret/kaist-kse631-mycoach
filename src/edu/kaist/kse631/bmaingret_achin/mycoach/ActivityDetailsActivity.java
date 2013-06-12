@@ -34,9 +34,7 @@ public class ActivityDetailsActivity extends Activity {
 			continueButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(ActivityDetailsActivity.this, MainActivity.class);
-					startActivity(intent);
-					finish();
+					manageProject();
 				}
 			});
 		}
@@ -89,5 +87,23 @@ public class ActivityDetailsActivity extends Activity {
 		
 
 		
+	}
+
+	private void manageProject() {
+		ProjectManager manager = new ProjectManager(this);
+		if (manager.isEndPeriod()){
+			Intent intent = new Intent(ActivityDetailsActivity.this, LevelUpActivity.class);
+			startActivity(intent);
+			finish();
+		}
+		else {
+			backToMain();
+		}
+	}
+	
+	private void backToMain(){
+		Intent intent = new Intent(ActivityDetailsActivity.this, MainActivity.class);
+		startActivity(intent);
+		finish();
 	}
 }
