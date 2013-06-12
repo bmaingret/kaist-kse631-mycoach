@@ -10,7 +10,11 @@ public class TipHelper {
 	}
 	
 	public String getRandomTip(){
-		return "TIPS";
+		return "1) This week, we will try putting down chopsticks for a moment after each mouthful."
+				+ System.getProperty ("line.separator")
+				+ "Once you have a mouthful of food, put down your chopstick and concentrate on chewing."
+				+ System.getProperty ("line.separator")
+				+ "Taste your food slowly. You can prevent overeating.";
 	}
 	
 	protected void setTipDisplayed(int id){
