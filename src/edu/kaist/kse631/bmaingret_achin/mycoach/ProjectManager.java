@@ -24,7 +24,11 @@ public class ProjectManager {
 	public int getWeeklyAchievementPercentage(){
 		return 0;
 	}
-		
+	
+	public int getActivityAchievment(long goalTimeMillis, long achievedTimeMillis){
+		return 0;
+	}
+	
 	public boolean isLevelUp(){
 		return false;
 	}
