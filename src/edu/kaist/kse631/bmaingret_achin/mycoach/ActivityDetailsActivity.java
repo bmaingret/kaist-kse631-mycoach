@@ -10,7 +10,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,8 +17,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class ActivityDetailsActivity extends Activity {
-
-	private static final String TAG = "ActivityDetails";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +62,6 @@ public class ActivityDetailsActivity extends Activity {
 				    TimeUnit.MILLISECONDS.toMinutes(duration) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(duration)),
 				    TimeUnit.MILLISECONDS.toSeconds(duration) - TimeUnit.HOURS.toSeconds(TimeUnit.MILLISECONDS.toHours(duration)) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))
 			);
-			Log.d(TAG, "Duration: " + durationStr);
 			durationTextView.setText(durationStr);
 			
 			/* Date-time*/
@@ -90,8 +86,8 @@ public class ActivityDetailsActivity extends Activity {
 			TextView caloriesTextView = (TextView) findViewById(R.id.details_calories);
 			caloriesTextView.setText(String.valueOf(calories));
 		}
-		else{
-			Log.e(TAG, "Activity not found!");
-		}		
+		
+
+		
 	}
 }

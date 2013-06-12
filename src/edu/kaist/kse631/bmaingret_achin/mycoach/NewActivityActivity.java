@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Build;
@@ -30,6 +34,7 @@ public class NewActivityActivity extends BaseActivity {
 	private long activityId = -1;
 	private Cursor activities = null;
 	private Spinner activitySpinner = null;
+	private static final int NOTIFICATION_ID = 631;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +56,25 @@ public class NewActivityActivity extends BaseActivity {
 				Toast toast = Toast.makeText(NewActivityActivity.this,
 						"Activity id:" + activityId, Toast.LENGTH_SHORT);
 				toast.show();
+				
+				//Notification
+				NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+				@SuppressWarnings("deprecation")
+				Notification notification = new Notification(R.drawable.ic_launcher, "Ongoing activity: " + activity, System.currentTimeMillis());
+				notification.flags = Notification.FLAG_ONGOING_EVENT;
+				Intent notificationIntent = new Intent(NewActivityActivity.this,
+						MainActivity.class);
+				notificationIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				PendingIntent contentPendingIntent = PendingIntent.getActivity(getApplicationContext(), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+				notification.setLatestEventInfo(getApplicationContext(), "myCoach", "Ongoing activity: " + activity, contentPendingIntent);
+				mNotificationManager.notify(NOTIFICATION_ID, notification);
 
 				Intent intent = new Intent(NewActivityActivity.this,
 						MainActivity.class);
 				setResult(RESULT_OK, intent);
 				intent.putExtra("activityId", activityId);
 				intent.putExtra("activity", activity);
+				//intent.putExtra("notificationID", NOTIFICATION_ID);
 				finish();
 			}
 		});

@@ -13,8 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/levelup_percentLbl"
@@ -82,7 +81,6 @@
                 android:text="@string/projSetting_goalLevelLabel"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textSize="12sp" />
-
         </RelativeLayout>
 
         <TextView
@@ -185,8 +183,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:orientation="vertical" 
-        >
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/textView7"
@@ -210,17 +207,16 @@
             android:id="@+id/projSetting_activities"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:choiceMode="multipleChoice"
-            android:layout_weight="0.1" >
+            android:layout_weight="0.1"
+            android:choiceMode="multipleChoice" >
         </ListView>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" 
         android:layout_weight="1"
-        >
+        android:orientation="vertical" >
 
         <View
             android:layout_width="fill_parent"
