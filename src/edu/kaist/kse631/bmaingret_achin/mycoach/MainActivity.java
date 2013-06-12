@@ -98,6 +98,7 @@ public class MainActivity extends BaseActivity {
 				intent.putExtra(C.DETAILS_FROM, C.DETAILS_FROM_MAIN);
 				intent.putExtra("activityId", id);
 				startActivity(intent);
+				updateHistory();
 			}
 		});
         
