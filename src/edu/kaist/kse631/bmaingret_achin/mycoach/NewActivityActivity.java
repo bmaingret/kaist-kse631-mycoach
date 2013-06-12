@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,46 +30,54 @@ public class NewActivityActivity extends BaseActivity {
 	private long activityId = -1;
 	private Cursor activities = null;
 	private Spinner activitySpinner = null;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_new_activity);
 		setupActionBar();
-		
+
 		/* Spinned listener */
 		activitySpinner = (Spinner) findViewById(R.id.newActivity_activity_list);
-		
-		/* Start button Listener*/
+
+		/* Start button Listener */
 		ImageButton startButton = (ImageButton) findViewById(R.id.newActivity_start_button);
 		startButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				activityId = activitySpinner.getSelectedItemId();
-				String activity = ((Cursor) activitySpinner.getSelectedItem()).getString(1);
-				Toast toast = Toast.makeText(NewActivityActivity.this, "Activity id:" + activityId, Toast.LENGTH_SHORT);
+				String activity = ((Cursor) activitySpinner.getSelectedItem())
+						.getString(1);
+				Toast toast = Toast.makeText(NewActivityActivity.this,
+						"Activity id:" + activityId, Toast.LENGTH_SHORT);
 				toast.show();
 
-				Intent intent = new Intent(NewActivityActivity.this, MainActivity.class);
-				setResult(RESULT_OK, intent); 
+				Intent intent = new Intent(NewActivityActivity.this,
+						MainActivity.class);
+				setResult(RESULT_OK, intent);
 				intent.putExtra("activityId", activityId);
 				intent.putExtra("activity", activity);
 				finish();
 			}
 		});
-		
-		/* Populate activity list*/
-		ActivitiesTableHelper helper = new ActivitiesTableHelper(getApplicationContext());
+
+		/* Populate activity list */
+		ActivitiesTableHelper helper = new ActivitiesTableHelper(
+				getApplicationContext());
 		activities = helper.getActivityList();
 
-        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, activities, 
-        		new String[] {ActivitiesTableHelper.COLUMN_ACTIVITY, ActivitiesTableHelper.COLUMN_ID}, 
-        		new int[] {android.R.id.text1});
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+				android.R.layout.simple_spinner_item, activities, new String[] {
+						ActivitiesTableHelper.COLUMN_ACTIVITY,
+						ActivitiesTableHelper.COLUMN_ID },
+				new int[] { android.R.id.text1 });
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        activitySpinner.setAdapter(adapter);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		activitySpinner.setAdapter(adapter);
+
+		setActivityIconListener();
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -78,11 +87,103 @@ public class NewActivityActivity extends BaseActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void setupActionBar() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 		}
+	}
+
+	private void setActivityIconListener() {
+		// Activity Icon Listener
+		ImageButton btnSoccer = (ImageButton) findViewById(R.id.btnSoccer);
+		btnSoccer.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				SimpleCursorAdapter adapter = (SimpleCursorAdapter) activitySpinner
+						.getAdapter();
+				for (int i = 0; i < adapter.getCount(); i++) {
+					// Log.d("New Activity", "Item:" +
+					// ((Cursor)adapter.getItem(i)).getString(1));
+					if (adapter.getItem(i) != null
+							&& ((Cursor) adapter.getItem(i)).getString(1)
+									.equalsIgnoreCase("playing soccer")) {
+						activitySpinner.setSelection(i);
+						break;
+					}
+				}
+
+			}
+		});
+
+		ImageButton btnTennis = (ImageButton) findViewById(R.id.btnTennis);
+		btnTennis.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				SimpleCursorAdapter adapter = (SimpleCursorAdapter) activitySpinner
+						.getAdapter();
+				for (int i = 0; i < adapter.getCount(); i++) {
+					// Log.d("New Activity", "Item:" +
+					// ((Cursor)adapter.getItem(i)).getString(1));
+					if (adapter.getItem(i) != null
+							&& ((Cursor) adapter.getItem(i)).getString(1)
+									.equalsIgnoreCase("playing tennis")) {
+						activitySpinner.setSelection(i);
+						break;
+					}
+				}
+
+			}
+		});
+
+		ImageButton btnRunning = (ImageButton) findViewById(R.id.btnRunning);
+		btnRunning.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				SimpleCursorAdapter adapter = (SimpleCursorAdapter) activitySpinner
+						.getAdapter();
+				for (int i = 0; i < adapter.getCount(); i++) {
+					// Log.d("New Activity", "Item:" +
+					// ((Cursor)adapter.getItem(i)).getString(1));
+					if (adapter.getItem(i) != null
+							&& ((Cursor) adapter.getItem(i)).getString(1)
+									.equalsIgnoreCase("Running, general")) {
+						activitySpinner.setSelection(i);
+						break;
+					}
+				}
+
+			}
+		});
+
+		ImageButton btnBasketball = (ImageButton) findViewById(R.id.btnBasketball);
+		btnBasketball.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				SimpleCursorAdapter adapter = (SimpleCursorAdapter) activitySpinner
+						.getAdapter();
+				for (int i = 0; i < adapter.getCount(); i++) {
+					// Log.d("New Activity", "Item:" +
+					// ((Cursor)adapter.getItem(i)).getString(1));
+					if (adapter.getItem(i) != null
+							&& ((Cursor) adapter.getItem(i)).getString(1)
+									.equalsIgnoreCase(
+											"Playing basketball, non game")) {
+						activitySpinner.setSelection(i);
+						break;
+					}
+				}
+
+			}
+		});
 	}
 }

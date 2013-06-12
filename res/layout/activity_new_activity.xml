@@ -51,7 +51,7 @@
         android:layout_marginBottom="-20dp" >
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/btnSoccer"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginRight="-20dp"
@@ -62,7 +62,7 @@
             android:src="@drawable/soccer_icon" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/btnTennis"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:background="@null"
@@ -78,7 +78,7 @@
         android:layout_marginBottom="-20dp" >
 
         <ImageButton
-            android:id="@+id/imageButton1"
+            android:id="@+id/btnRunning"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginRight="-20dp"
@@ -87,7 +87,7 @@
             android:src="@drawable/running_icon" />
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/btnBasketball"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:background="@null"
