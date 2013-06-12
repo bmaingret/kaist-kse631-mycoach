@@ -2,6 +2,8 @@ package edu.kaist.kse631.bmaingret_achin.mycoach;
 
 import java.util.Calendar;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ public class MainActivity extends BaseActivity {
 	private long activityId = -1;
 	private boolean ongoing = false;
 	private static final String TAG = "MainActivity";
+	private static final int NOTIFICATION_ID = 631;
 	private Chronometer chrono = null;
 	private ListView historyView = null;
 	long datetime  = 0;
@@ -79,6 +82,10 @@ public class MainActivity extends BaseActivity {
 			public void onClick(View v) {
 				chrono.stop();
 				updateUI(false);
+				
+				//Removing Ongoing Notification
+				NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+				mNotificationManager.cancel(NOTIFICATION_ID);
 				
 				Toast toast = Toast.makeText(MainActivity.this, "TODO: Record activity", Toast.LENGTH_SHORT);
 				toast.show();
