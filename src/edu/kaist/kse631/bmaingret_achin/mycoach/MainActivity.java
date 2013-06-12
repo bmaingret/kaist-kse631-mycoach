@@ -1,6 +1,9 @@
 package edu.kaist.kse631.bmaingret_achin.mycoach;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,6 +20,7 @@ import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.SimpleCursorAdapter.ViewBinder;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -104,6 +108,7 @@ public class MainActivity extends BaseActivity {
         historyView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,	long id) {
+				Log.d(TAG, "Clicked activity's id" + id);
 				Intent intent = new Intent(MainActivity.this, ActivityDetailsActivity.class);
 				intent.putExtra("activityId", id);
 				startActivity(intent);	
@@ -167,13 +172,27 @@ public class MainActivity extends BaseActivity {
     protected void updateHistory(){
         UserActivitiesTableHelper helper = new UserActivitiesTableHelper(this);
         Cursor history = helper.getHistory();
-        String[] from = new String[]{ActivitiesTableHelper.COLUMN_ACTIVITY};
-        int[] to = {android.R.id.text1};
+        String[] from = new String[]{ActivitiesTableHelper.COLUMN_ACTIVITY, UserActivitiesTableHelper.COLUMN_DATETIME};
+        int[] to = {android.R.id.text1, android.R.id.text2};
         SimpleCursorAdapter historyAdapter = new SimpleCursorAdapter(this,
-        		android.R.layout.simple_list_item_1,
+        		android.R.layout.simple_list_item_2,
         		history,
         		from,
         		to);
+        historyAdapter.setViewBinder(new ViewBinder() {
+            public boolean setViewValue(View aView, Cursor aCursor, int aColumnIndex) {
+                if (aColumnIndex == aCursor.getColumnIndex(UserActivitiesTableHelper.COLUMN_DATETIME)) {
+                        long datetime= aCursor.getLong(aColumnIndex);
+                        TextView textView = (TextView) aView;
+            			Date date = new Date(datetime);
+            			DateFormat formatter = new SimpleDateFormat(" MM/dd/yyyy");
+            			String dateFormatted = formatter.format(date);
+                        textView.setText(dateFormatted);
+                        return true;
+                 }
+                 return false;
+            }
+        });
         historyView.setAdapter(historyAdapter);
     }
 }
