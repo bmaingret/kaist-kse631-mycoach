@@ -24,6 +24,8 @@ public class StartActivity extends BaseActivity {
 		SharedPreferences prefs = getApplicationContext().getSharedPreferences(C.PREF, Context.MODE_PRIVATE);
 		String projectState = prefs.getString(C.P_PROJECT_STATE, null);
 		boolean projectCreatedOrStarted = (null != projectState);
+		Log.i("StartActivity", (projectCreatedOrStarted)?"true":"false");
+		
 		
 		/* Act accordingly */
 		if (projectCreatedOrStarted && !C.DEBUG){
@@ -47,4 +49,6 @@ public class StartActivity extends BaseActivity {
 			});
 		}
 	}
+	
+	
 }
